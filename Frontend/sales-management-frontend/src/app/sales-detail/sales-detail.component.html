@@ -1,0 +1,29 @@
+<div class="sales-detail">
+    <h2>Sale Details</h2>
+    <div *ngIf="sale">
+      <div class="detail">
+        <label>Sale ID:</label> {{ sale.id }}
+      </div>
+      <div class="detail">
+        <label>Date:</label> {{ sale.date | date }}
+      </div>
+      <div class="detail">
+        <label>Customer:</label> {{ sale.customerName }}
+      </div>
+      <div class="detail">
+        <label>Total Amount:</label> {{ sale.totalAmount | currency }}
+      </div>
+      <div class="items">
+        <h3>Items Sold</h3>
+        <ul>
+          <li *ngFor="let item of sale.items">
+            {{ item.name }} - {{ item.quantity }} x {{ item.price | currency }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="!sale">
+      <p>Loading sale details...</p>
+    </div>
+  </div>
+  

@@ -1,0 +1,23 @@
+<div>
+    <h2>{{ saleId ? 'Edit Sale' : 'Create Sale' }}</h2>
+    <form [formGroup]="saleForm" (ngSubmit)="onSubmit()">
+      <label for="customerName">Customer Name</label>
+      <input id="customerName" formControlName="customerName">
+      <label for="reference">Reference</label>
+      <input id="reference" formControlName="reference">
+      <label for="date">Date</label>
+      <input id="date" formControlName="date" type="date">
+      <label for="status">Status</label>
+      <input id="status" formControlName="status">
+      <label for="grandTotal">Grand Total</label>
+      <input id="grandTotal" formControlName="grandTotal" type="number">
+      <label for="due">Due</label>
+      <input id="due" formControlName="due" type="number">
+      <label for="paymentStatus">Payment Status</label>
+      <input id="paymentStatus" formControlName="paymentStatus">
+      <label for="biller">Biller</label>
+      <input id="biller" formControlName="biller">
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  

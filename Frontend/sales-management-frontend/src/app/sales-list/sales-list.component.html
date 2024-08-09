@@ -1,0 +1,36 @@
+<div>
+    <h2>Sales List</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Customer Name</th>
+          <th>Reference</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Grand Total</th>
+          <th>Paid</th>
+          <th>Due</th>
+          <th>Payment Status</th>
+          <th>Biller</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sale of sales">
+          <td>{{sale.customerName}}</td>
+          <td>{{sale.reference}}</td>
+          <td>{{sale.date}}</td>
+          <td>{{sale.status}}</td>
+          <td>{{sale.grandTotal}}</td>
+          <td>{{sale.due}}</td>
+          <td>{{sale.paymentStatus}}</td>
+          <td>{{sale.biller}}</td>
+          <td>
+            <button (click)="editSale(sale.id)">Edit</button>
+            <button (click)="deleteSale(sale.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
