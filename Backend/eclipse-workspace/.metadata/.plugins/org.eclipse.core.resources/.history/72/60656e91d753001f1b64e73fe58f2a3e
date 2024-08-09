@@ -1,0 +1,45 @@
+package com.example.sales_management.service;
+
+import com.example.sales_management.entity.Sale;
+import com.example.sales_management.repository.SaleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class SaleService {
+    @Autowired
+    private SaleRepository saleRepository;
+
+    public List<Sale> getAllSales() {
+        return saleRepository.findAll();
+    }
+
+    public Optional<Sale> getSaleById(Long id) {
+        return saleRepository.findById(id);
+    }
+
+    public Sale createSale(Sale sale) {
+        return saleRepository.save(sale);
+    }
+
+    public Sale updateSale(Long id, Sale saleDetails) {
+        Sale sale = saleRepository.findById(id).orElseThrow();
+        sale.setCustomerName(saleDetails.getCustomerName());
+        sale.setReference(saleDetails.getReference());
+        sale.setDate(saleDetails.getDate());
+        sale.setStatus(saleDetails.getStatus());
+        sale.setGrandTotal(saleDetails.getGrandTotal());
+        sale.setPaid(saleDetails.getPaid());
+        sale.setDue(saleDetails.getDue());
+        sale.setPaymentStatus(saleDetails.getPaymentStatus());
+        sale.setBiller(saleDetails.getBiller());
+        return saleRepository.save(sale);
+    }
+
+    public void deleteSale(Long id) {
+        saleRepository.deleteById(id);
+    }
+}

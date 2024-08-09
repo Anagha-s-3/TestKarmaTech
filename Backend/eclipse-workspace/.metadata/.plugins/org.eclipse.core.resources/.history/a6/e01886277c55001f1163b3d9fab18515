@@ -1,0 +1,61 @@
+package com.example.sales_management.controller;
+
+import com.example.sales_management.entity.Sale;
+import com.example.sales_management.service.SaleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/sales")
+@CrossOrigin(origins = "http://localhost:4200")
+public class SaleController {
+
+    @Autowired
+    private SaleService saleService;
+
+    @GetMapping
+    public List<Sale> getAllSales() {
+        return saleService.getAllSales();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Sale> getSaleById(@PathVariable Long id) {
+        Optional<Sale> sale = saleService.getSaleById(id);
+        if (sale.isPresent()) {
+            return ResponseEntity.ok(sale.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping
+    public ResponseEntity<Sale> createSale(@RequestBody Sale sale) {
+        Sale createdSale = saleService.createSale(sale);
+        return ResponseEntity.ok(createdSale);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Sale> updateSale(@PathVariable Long id, @RequestBody Sale sale) {
+        Optional<Sale> updatedSale = Optional.ofNullable(saleService.updateSale(id, sale));
+        if (updatedSale.isPresent()) {
+            return ResponseEntity.ok(updatedSale.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSale(@PathVariable Long id) {
+        boolean isDeleted = saleService.deleteSale(id);
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+}
+

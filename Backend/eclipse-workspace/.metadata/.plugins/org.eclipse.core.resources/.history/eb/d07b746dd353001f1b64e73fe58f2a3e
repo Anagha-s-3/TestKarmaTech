@@ -1,0 +1,5 @@
+package com.example.sales_management.controller;
+
+public class SecurityConfig {
+
+}

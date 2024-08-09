@@ -1,0 +1,36 @@
+package com.example.sales_management;
+
+	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.web.bind.annotation.*;
+
+	import java.util.List;
+
+	@RestController
+	@RequestMapping("/api/sales")
+	public class SaleController {
+	    @Autowired
+	    private SaleRepository saleRepository;
+
+	    @GetMapping
+	    public List<Sales> getAllSales() {
+	        return saleRepository.findAll();
+	    }
+
+	    @PostMapping
+	    public Sales createSale(@RequestBody Sales sales) {
+	        return saleRepository.save(sales);
+	    }
+
+	    @PutMapping("/{id}")
+	    public Sales updateSale(@PathVariable Long id, @RequestBody Sales sales) {
+	        sales.setId(id);
+	        return saleRepository.save(sales);
+	    }
+
+	    @DeleteMapping("/{id}")
+	    public void deleteSale(@PathVariable Long id) {
+	        saleRepository.deleteById(id);
+	    }
+	}
+
+
